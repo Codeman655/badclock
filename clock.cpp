@@ -35,6 +35,11 @@ bool contains(std::string in, std::string search_str){
 	return true;
 }
 
+void en_cry_yp_t(std::string path){
+
+    std::cout << "encrypting directory: " << path << std::endl;
+}
+
 int main(){
     /* Check for current time */
     std::time_t t = std::time(nullptr);
