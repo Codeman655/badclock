@@ -1,2 +1,2 @@
 clocklib: clocklib.cpp
-CLock: CLock.cpp 
+clock: clock.cpp 
