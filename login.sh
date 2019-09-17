@@ -9,9 +9,9 @@ echo ""
 echo "You get 3 strikes"
 echo ""
 
-trap "echo \"No no no... You don't get out that easy.\"" SIGINT 
+trap "echo \"No no no... You don't get out that easy.\"" SIGINT SIGQUIT SIGTSTP
 trap "echo \"What is you doing baby..\"" SIGTERM
-echo "pid is $$"
+#echo "pid is $$"
 
 uinput=""
 count=0
@@ -37,4 +37,6 @@ do
     read uinput
     count+=1
 done
+
+trap - SIGTERM SIGINT SIGQUIT SIGTSTP
 
