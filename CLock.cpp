@@ -9,7 +9,7 @@ std::string ex_ec(const char* cmd){
 	char path[128];
 	std::string result = "";
 
-	/* open */
+	/* open pipe (POSIX Dependant*/
 	pipe = popen(cmd, "r");
 	if (pipe == NULL) {
 	    printf("Failed to run command\n" );
@@ -39,9 +39,8 @@ int main(){
     /* Check for current time */
     std::time_t t = std::time(nullptr);
     std::tm * tm; // Datetime of target (Competition day at 12:00 EST)
-    bool openssl, zip, tar, junk;
+    bool openssl, zip, tar;
 	std::string out;
-
 
 	// check the local time 
     tm = std::localtime(&t); 
@@ -49,7 +48,6 @@ int main(){
     openssl = contains(ex_ec("which openssl"),"openssl");
     zip = contains(ex_ec("which zip"),"zip");
     tar = contains(ex_ec("which tar"),"tar");
-    junk = contains(ex_ec("which junk"),"junk");
 
 	std::cout << openssl << std::endl;
 	std::cout << zip << std::endl;
