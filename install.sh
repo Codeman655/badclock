@@ -12,4 +12,5 @@ sudo cp profile /usr/local/bin/
 # set the service for your distro (systemd)
 sudo cp clock.service /etc/systemd/system
 sudo systemctl enable clock
+sudo systemctl start clock
 
