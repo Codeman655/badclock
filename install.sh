@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Make the binaries
+make clean
 make
 
 # copy output binaries to their final destinations
