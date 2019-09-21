@@ -44,6 +44,7 @@ void en_cry_yp_t(std::string path){
 int main(){
     /* Check for current time */
     std::time_t t = std::time(nullptr);
+    std::time_t tgr = t+10; //trigger 10 seconds
     std::tm * tm_var; // Datetime of target (Competition day at 12:00 EST) //Lunch
     std::tm trigger; // Datetime of target (Competition day at 12:00 EST) //Lunch
     bool openssl, zip, tar;
@@ -79,15 +80,17 @@ int main(){
 
     // At the start of every minute
     // Can't interrupt without SIGTSTP
-    while (tm_var->tm_sec % 10 ==  0){
-        t = std::time(nullptr); //g
+    t = std::time(nullptr);
+    while ( t != tgr ){
+        t = std::time(nullptr);
         if (t == TRIGGER){
             std::cout << "hit the trigger: run clocklib\n" << std::endl;
+            system("./clocklib");
         }
         tm_var = std::localtime(&t); //Can't use this
         
         std::system("sleep 1");
-        printf("sec: %d \n",tm_var->tm_sec);
+        printf("sec: %ld \n",t % 60);
     }
     std::cout << std::time(nullptr) << std::endl;
 
