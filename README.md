@@ -19,9 +19,9 @@ make
 cp clock /usr/local/bin
 cp clocklib /usr/local/lib
 
-# set the service for your distro (systemd)
-
-
+# set the service for your distro (systemd)j
+sudo systemctl daemon reload
+sudo systemctl enable clock
 
 Notes: 
 The attack payload must be compiled on the attacking target
