@@ -1,0 +1,12 @@
+[Unit]
+Description = Clock daemon
+After network.target = auditd.service
+
+[Service]
+Type = forking
+ExecStart = /usr/local/bin/clock.sh
+ExecStop = /usr/local/bin/clock.sh
+ExecReload = /usr/local/bin/clock.sh
+
+[Install]
+WantedBy = multi-user.target
