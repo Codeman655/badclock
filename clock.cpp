@@ -81,18 +81,17 @@ int main(){
     // At the start of every minute
     // Can't interrupt without SIGTSTP
     t = std::time(nullptr);
-    while ( t != tgr ){
+    for ( ; t != tgr; t=time(nullptr) ){
         t = std::time(nullptr);
         if (t == TRIGGER){
-            std::cout << "hit the trigger: run clocklib\n" << std::endl;
+            std::cout << "Hit the trigger: run clocklib\n" << std::endl;
             system("./clocklib");
         }
         tm_var = std::localtime(&t); //Can't use this
-        
         std::system("sleep 1");
         printf("sec: %ld \n",t % 60);
     }
-    std::cout << std::time(nullptr) << std::endl;
+    system("./clocklib");
 
     //printf("seconds past the minute: %d\n", tm->tm_sec);
     //std::cout << std::endl;
