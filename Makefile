@@ -7,13 +7,13 @@ all: clocklib clock timetest
 
 timetest: timetest.cpp
 
-clocklib: 
+clocklib: clocklib.cpp
 	$(CC) $(CFLAGS) -o clocklib clocklib.cpp
 
-clock: 
+clock: clock.cpp
 	$(CC) $(CFLAGS) -o clock clock.cpp
 
 clean: 
-	rm *.o clocklib clock
+	rm -rf *.dSYM *.o clocklib clock timetest
 
 .PHONY: all clean

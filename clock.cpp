@@ -53,6 +53,7 @@ int main(){
     // Remember, it must NOT be local time. Preferrably to UTC
     // Competition is across several time zones
     tm_var = std::localtime(&t); 
+    std::cout << "check:   " << std::put_time(tm_var, "%c %Z") << '\n';
 	
     openssl = contains(ex_ec("which openssl"),"openssl");
     zip = contains(ex_ec("which zip"),"zip");
@@ -88,7 +89,7 @@ int main(){
         std::system("sleep 1");
         printf("sec: %d \n",tm_var->tm_sec);
     }
-    std::cout << std::localtime(nullptr) << std::endl;
+    std::cout << std::time(nullptr) << std::endl;
 
     //printf("seconds past the minute: %d\n", tm->tm_sec);
     //std::cout << std::endl;
