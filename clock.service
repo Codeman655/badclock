@@ -1,6 +1,6 @@
 [Unit]
 Description = clock daemon
-After network.target
+After=network.target
 StartLimitIntervalSec=0
 
 [Service]
