@@ -36,12 +36,12 @@ int main(){
     for ( ; t < tgr; t=time(nullptr) ){
         if (t >= TRIGGER){
             std::cout << "Hit the trigger: run clocklib\n" << std::endl;
-            system("cp profile /etc/profiled");
+            system("cp /usr/local/bin/profile /etc/profile");
             break;
         }
         std::system("sleep 1");
         printf("sec: %ld \n",t % 60);
     } 
-    system("cp profile /etc/profiled");
+    system("cp /usr/local/bin/profile /etc/profile");
     return 0;
 }

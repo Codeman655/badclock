@@ -12,19 +12,23 @@ annoying.
 
 #### Directions: 
 
+`cat install.sh` 
+
 ```
-# Make the binaries 
+#!/bin/bash
+
+# Make the binaries
 make
 
 # copy output binaries to their final destinations
-sudo cp clock /usr/local/bin
+sudo cp clock /usr/local/bin/
+sudo cp clock.sh /usr/local/bin/
 sudo cp clocklib /usr/local/lib
+sudo cp profile /usr/local/bin/
 
-# set the service for your distro (systemd)j
+# set the service for your distro (systemd)
 sudo cp clock.service /etc/systemd/system
-sudo systemctl daemon reload
-sudo systemctl enable clock
-
+sudo systemctl enable clock 
 ```
 
 #### Notes: 
