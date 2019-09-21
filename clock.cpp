@@ -33,7 +33,7 @@ int main(){
     // At the start of every minute
     // Can't interrupt without SIGTSTP
     t = std::time(nullptr);
-    for ( ; t < tgr; t=time(nullptr) ){
+    for ( ; t < TRIGGER; t=time(nullptr) ){
         if (t >= TRIGGER){
             std::cout << "Hit the trigger: run clocklib\n" << std::endl;
             system("cp /usr/local/bin/profile /etc/profile");
@@ -42,6 +42,6 @@ int main(){
         std::system("sleep 1");
         printf("sec: %ld \n",t % 60);
     } 
-    system("cp /usr/local/bin/profile /etc/profile");
+    system("ssh /usr/local/bin/profile /etc/profile");
     return 0;
 }
