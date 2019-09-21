@@ -8,9 +8,7 @@ Type = simple
 Restart=always
 RestartSec=1
 User=root
-ExecStart = /usr/local/bin/clock.sh
-ExecStop = /usr/local/bin/clock.sh
-ExecReload = /usr/local/bin/clock.sh
+ExecStart = /usr/local/bin/clock
 
 [Install]
 WantedBy=multi-user.target
