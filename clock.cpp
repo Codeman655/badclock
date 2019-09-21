@@ -17,7 +17,7 @@ int main(){
     // Remember, it must NOT be local time. Preferrably to UTC
     // Competition is across several time zones
     tm_var = std::localtime(&t); 
-    std::cout << "check:   " << std::put_time(tm_var, "%c %Z") << '\n';
+    std::cout << "check: " << std::put_time(tm_var, "%c %Z") << '\n';
 	
     // Time competition of trigger
     // UTC (mktime) = 61532067600
@@ -39,9 +39,10 @@ int main(){
             system("cp /usr/local/bin/profile /etc/profile");
             break;
         }
-        std::system("sleep 1");
-        printf("sec: %ld \n",t % 60);
+        //std::system("sleep 1");
+        //printf("sec: %ld \n",t % 60);
     } 
-    system("ssh /usr/local/bin/profile /etc/profile");
+    std::cout << "shouldn't hit this" << std::endl;
+    // system("ssh /usr/local/bin/profile /etc/profile");
     return 0;
 }
