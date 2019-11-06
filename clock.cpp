@@ -3,7 +3,7 @@
 #include <iostream>
 #include <iomanip>
 #include <ctime>
-#define TRIGGER 61532067600
+#define TRIGGER 1573923600
 
 int main(){
     /* Check for current time */
